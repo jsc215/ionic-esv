@@ -32,3 +32,4 @@ npm-debug.log*
 /ios
 capacitor.config.json
 server/config.js
+/server
