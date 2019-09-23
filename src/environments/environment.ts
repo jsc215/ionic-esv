@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  BASE_URL: 'http://localhost:3000/api',
+  BASE_URL: 'https://pray-day.firebaseio.com/api',
+  // BASE_URL: 'http://localhost:3000/api',
 };
 
 /*

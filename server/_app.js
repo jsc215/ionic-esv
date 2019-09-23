@@ -3,7 +3,7 @@ import cors from 'cors';
 const app = express();
 import path from 'path';
 import query from './routes/query';
-const port = 3000 || process.env.PORT;
+const port = process.env.PORT || 3000;
 app.use(cors());
 
 app.use('/api/query', query);
