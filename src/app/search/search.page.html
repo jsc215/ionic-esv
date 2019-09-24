@@ -21,7 +21,6 @@
       <ion-row class="ion-text-center">
         <ion-col size-sm="6" offset-sm="3">
           <ion-item *ngIf="searchType === 'text'">
-            <!-- <ion-label position="floating">Search the Bible</ion-label> -->
             <ion-input type="text" clearInput placeholder="enter a verse" formControlName="verse"></ion-input>
           </ion-item>
           <ion-item *ngIf="searchType === 'search'">
@@ -30,7 +29,6 @@
               placeholder="enter word or phrase(wrap in quotations for more precise results)"
               formControlName="verse"
             ></ion-textarea>
-            <!-- <ion-label position="floating">Search the Bible</ion-label> -->
           </ion-item>
         </ion-col>
       </ion-row>
@@ -54,9 +52,9 @@
           </ion-list>
         </ion-col>
       </ion-row>
-      <ion-row class="ion-justify-content-end">
-        <ion-col size="3">
-          <ion-button color="primary" class="ion-margin" (click)="getSearch()">Submit</ion-button>
+      <ion-row class="ion-justify-content-center">
+        <ion-col>
+          <ion-button color="tertiary" fill="outline" expand="block" (click)="getSearch()">Submit</ion-button>
         </ion-col>
       </ion-row>
     </form>
@@ -65,7 +63,17 @@
       <span *ngIf="searchResult && searchType === 'text'">
         <ion-row>
           <ion-col>
-            <p *ngFor="let res of searchResult">{{ res }}</p>
+            <ion-card>
+              <ion-card-subtitle class="ion-padding">
+                {{ searchResult[0] }}
+              </ion-card-subtitle>
+              <ion-card-content style="padding-top: 0px;">
+                <span *ngFor="let res of searchResult.slice(1)">
+                  <p *ngIf="res === ''"><br /></p>
+                  <p *ngIf="res !== ''">{{ res }}</p>
+                </span>
+              </ion-card-content>
+            </ion-card>
           </ion-col>
         </ion-row>
       </span>
@@ -73,13 +81,33 @@
 
     <ion-text color="dark">
       <span *ngIf="searchResult && searchType === 'search'">
-        <ion-row class="ion-justify-content-end">
+        <ion-row>
           <ion-col class="ion-text-end">
             <ion-text>
               <p>Total Results: {{ searchResult['total_results'] }}</p>
             </ion-text>
           </ion-col>
         </ion-row>
+        <ion-row class="ion-text-center">
+          <ion-col size="4">
+            <ion-button [disabled]="searchResult.page === 1" (click)="decrementPage()" fill="clear">
+              <ion-icon color="primary" size="large" name="arrow-dropleft" class="ion-margin-end"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="4" class="ion-align-self-center">
+            Page {{ searchResult['page'] }} of {{ searchResult['total_pages'] }}
+          </ion-col>
+          <ion-col size="4">
+            <ion-button
+              [disabled]="searchResult.page === searchResult.total_pages"
+              (click)="incrementPage()"
+              fill="clear"
+            >
+              <ion-icon color="primary" size="large" name="arrow-dropright"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
         <ion-row>
           <ion-col>
             <ion-card *ngFor="let result of searchResult['results']">
