@@ -34,3 +34,4 @@ capacitor.config.json
 server/config.js
 /environments/environment.heroku.ts
 /data
+/server
