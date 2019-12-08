@@ -1,12 +1,17 @@
 import { SearchService } from './search.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder
+} from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.page.html',
-  styleUrls: ['./search.page.scss'],
+  styleUrls: ['./search.page.scss']
 })
 export class SearchPage implements OnInit {
   searchForm: FormGroup;
@@ -16,11 +21,12 @@ export class SearchPage implements OnInit {
   errorMsg;
   isLoading = false;
   storedQuery;
+  showSearch = false;
 
   constructor(
     private searchService: SearchService,
     private fb: FormBuilder,
-    private loadingController: LoadingController,
+    private loadingController: LoadingController
   ) {}
 
   ngOnInit() {
@@ -34,12 +40,16 @@ export class SearchPage implements OnInit {
     this.storedQuery = '';
   }
 
+  showSearchForm() {
+    this.showSearch = !this.showSearch;
+  }
+
   incrementPage() {
     if (this.storedQuery) {
       const page = this.searchForm.get('page').value + this.storedQuery.page;
       this.searchForm.patchValue({
         verse: this.storedQuery.verse,
-        page,
+        page
       });
 
       console.log(this.searchForm.value);
@@ -53,7 +63,7 @@ export class SearchPage implements OnInit {
       console.log(page);
       this.searchForm.patchValue({
         verse: this.storedQuery.verse,
-        page,
+        page
       });
       console.log(this.searchForm.value);
       this.getSearch();
@@ -67,15 +77,16 @@ export class SearchPage implements OnInit {
       includeFootnotes: true,
       includeFootnoteBody: true,
       includeVerseNumbers: true,
-      page: 1,
+      page: 1
     });
   }
 
   getSearch() {
     this.isLoading = true;
+    this.showSearch = false;
 
     this.searchService.search(this.searchForm.value).subscribe(
-      (data) => {
+      data => {
         if (this.searchForm.value.searchType === 'search') {
           this.storedQuery = this.searchForm.value;
         }
@@ -83,13 +94,13 @@ export class SearchPage implements OnInit {
         this.searchForm.reset(this.createSearchForm());
         this.isLoading = false;
       },
-      (error) => {
+      error => {
         console.log(error.error);
         this.errorMsg = error.error;
         this.searchForm.reset(this.createSearchForm());
         this.isLoading = false;
         this.loadingController.dismiss();
-      },
+      }
     );
   }
 }

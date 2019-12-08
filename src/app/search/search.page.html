@@ -12,23 +12,39 @@
 
 <ion-content class="ion-padding">
   <ion-segment (ionChange)="onChangeSearchType($event)">
-    <ion-segment-button value="text" checked>Search by Verse</ion-segment-button>
-    <ion-segment-button value="search">Search by word or phrase</ion-segment-button>
+    <ion-segment-button value="text" checked
+      >Search by Verse</ion-segment-button
+    >
+    <ion-segment-button value="search"
+      >Search by word or phrase</ion-segment-button
+    >
   </ion-segment>
 
   <ion-grid>
-    <form *ngIf="!searchResult" [formGroup]="searchForm">
+    <ion-button color="primary" expand="block" (click)="showSearchForm()"
+      >Show Search Form</ion-button
+    >
+    <form
+      *ngIf="!searchResult || showSearch"
+      (ngSubmit)="getSearch()"
+      [formGroup]="searchForm"
+    >
       <ion-row class="ion-text-center">
         <ion-col size-sm="6" offset-sm="3">
           <ion-item *ngIf="searchType === 'text'">
-            <ion-input type="text" clearInput placeholder="enter a verse" formControlName="verse"></ion-input>
+            <ion-input
+              type="text"
+              clearInput
+              placeholder="enter a verse"
+              formControlName="verse"
+            ></ion-input>
           </ion-item>
           <ion-item *ngIf="searchType === 'search'">
-            <ion-textarea
+            <ion-input
               clearInput
               placeholder="enter word or phrase(wrap in quotations for more precise results)"
               formControlName="verse"
-            ></ion-textarea>
+            ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -39,14 +55,29 @@
             <ion-list-header>Settings</ion-list-header>
             <ion-item>
               <ion-label>Include Footnotes</ion-label>
-              <ion-checkbox color="primary" formControlName="includeFootnotes" checked slot="start"></ion-checkbox>
+              <ion-checkbox
+                color="primary"
+                formControlName="includeFootnotes"
+                checked
+                slot="start"
+              ></ion-checkbox>
             </ion-item>
             <ion-item>
-              <ion-checkbox color="secondary" formControlName="includeFootnoteBody" checked slot="start"></ion-checkbox>
+              <ion-checkbox
+                color="secondary"
+                formControlName="includeFootnoteBody"
+                checked
+                slot="start"
+              ></ion-checkbox>
               <ion-label>Include Footnote Body</ion-label>
             </ion-item>
             <ion-item>
-              <ion-checkbox color="tertiary" formControlName="includeVerseNumbers" checked slot="start"></ion-checkbox>
+              <ion-checkbox
+                color="tertiary"
+                formControlName="includeVerseNumbers"
+                checked
+                slot="start"
+              ></ion-checkbox>
               <ion-label>Include Verse Numbers</ion-label>
             </ion-item>
           </ion-list>
@@ -54,7 +85,13 @@
       </ion-row>
       <ion-row class="ion-justify-content-center">
         <ion-col>
-          <ion-button color="tertiary" fill="outline" expand="block" (click)="getSearch()">Submit</ion-button>
+          <ion-button
+            color="tertiary"
+            fill="outline"
+            expand="block"
+            (click)="getSearch()"
+            >Submit</ion-button
+          >
         </ion-col>
       </ion-row>
     </form>
@@ -90,8 +127,17 @@
         </ion-row>
         <ion-row class="ion-text-center">
           <ion-col size="4">
-            <ion-button [disabled]="searchResult.page === 1" (click)="decrementPage()" fill="clear">
-              <ion-icon color="primary" size="large" name="arrow-dropleft" class="ion-margin-end"></ion-icon>
+            <ion-button
+              [disabled]="searchResult.page === 1"
+              (click)="decrementPage()"
+              fill="clear"
+            >
+              <ion-icon
+                color="primary"
+                size="large"
+                name="arrow-dropleft"
+                class="ion-margin-end"
+              ></ion-icon>
             </ion-button>
           </ion-col>
           <ion-col size="4" class="ion-align-self-center">
@@ -103,7 +149,11 @@
               (click)="incrementPage()"
               fill="clear"
             >
-              <ion-icon color="primary" size="large" name="arrow-dropright"></ion-icon>
+              <ion-icon
+                color="primary"
+                size="large"
+                name="arrow-dropright"
+              ></ion-icon>
             </ion-button>
           </ion-col>
         </ion-row>
