@@ -37,4 +37,4 @@ server/config.js
 /data
 /server
 /config.xml
-/environments
+src/environments
