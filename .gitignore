@@ -36,4 +36,5 @@ server/config.js
 /firebaseConfig.ts
 /data
 /server
+/config.xml
 
