@@ -12,32 +12,17 @@
 
 <ion-content class="ion-padding">
   <ion-segment (ionChange)="onChangeSearchType($event)">
-    <ion-segment-button value="text" checked
-      >Search by Verse</ion-segment-button
-    >
-    <ion-segment-button value="search"
-      >Search by word or phrase</ion-segment-button
-    >
+    <ion-segment-button value="text" checked>Search by Verse</ion-segment-button>
+    <ion-segment-button value="search">Search by word or phrase</ion-segment-button>
   </ion-segment>
 
   <ion-grid>
-    <ion-button color="primary" expand="block" (click)="showSearchForm()"
-      >Show Search Form</ion-button
-    >
-    <form
-      *ngIf="!searchResult || showSearch"
-      (ngSubmit)="getSearch()"
-      [formGroup]="searchForm"
-    >
+    <ion-button color="primary" expand="block" (click)="showSearchForm()">Show Search Form</ion-button>
+    <form *ngIf="!searchResult || showSearch" (ngSubmit)="getSearch()" [formGroup]="searchForm">
       <ion-row class="ion-text-center">
         <ion-col size-sm="6" offset-sm="3">
           <ion-item *ngIf="searchType === 'text'">
-            <ion-input
-              type="text"
-              clearInput
-              placeholder="enter a verse"
-              formControlName="verse"
-            ></ion-input>
+            <ion-input type="text" clearInput placeholder="enter a verse" formControlName="verse"></ion-input>
           </ion-item>
           <ion-item *ngIf="searchType === 'search'">
             <ion-input
@@ -55,29 +40,14 @@
             <ion-list-header>Settings</ion-list-header>
             <ion-item>
               <ion-label>Include Footnotes</ion-label>
-              <ion-checkbox
-                color="primary"
-                formControlName="includeFootnotes"
-                checked
-                slot="start"
-              ></ion-checkbox>
+              <ion-checkbox color="primary" formControlName="includeFootnotes" checked slot="start"></ion-checkbox>
             </ion-item>
             <ion-item>
-              <ion-checkbox
-                color="secondary"
-                formControlName="includeFootnoteBody"
-                checked
-                slot="start"
-              ></ion-checkbox>
+              <ion-checkbox color="secondary" formControlName="includeFootnoteBody" checked slot="start"></ion-checkbox>
               <ion-label>Include Footnote Body</ion-label>
             </ion-item>
             <ion-item>
-              <ion-checkbox
-                color="tertiary"
-                formControlName="includeVerseNumbers"
-                checked
-                slot="start"
-              ></ion-checkbox>
+              <ion-checkbox color="tertiary" formControlName="includeVerseNumbers" checked slot="start"></ion-checkbox>
               <ion-label>Include Verse Numbers</ion-label>
             </ion-item>
           </ion-list>
@@ -85,13 +55,7 @@
       </ion-row>
       <ion-row class="ion-justify-content-center">
         <ion-col>
-          <ion-button
-            color="tertiary"
-            fill="outline"
-            expand="block"
-            (click)="getSearch()"
-            >Submit</ion-button
-          >
+          <ion-button color="tertiary" fill="outline" expand="block" (click)="getSearch()">Submit</ion-button>
         </ion-col>
       </ion-row>
     </form>
@@ -100,14 +64,16 @@
       <span *ngIf="searchResult && searchType === 'text'">
         <ion-row>
           <ion-col>
-            <ion-card>
+            <ion-card (click)="saveCard(searchResult.slice(1))">
               <ion-card-subtitle class="ion-padding">
                 {{ searchResult[0] }}
               </ion-card-subtitle>
               <ion-card-content style="padding-top: 0px;">
-                <span *ngFor="let res of searchResult.slice(1)">
+                <span (click)="saveCard(res !== '')" *ngFor="let res of searchResult.slice(1)">
                   <p *ngIf="res === ''"><br /></p>
-                  <p *ngIf="res !== ''">{{ res }}</p>
+                  <p *ngIf="res !== ''">
+                    {{ res }}
+                  </p>
                 </span>
               </ion-card-content>
             </ion-card>
@@ -127,40 +93,21 @@
         </ion-row>
         <ion-row class="ion-text-center">
           <ion-col size="4">
-            <ion-button
-              [disabled]="searchResult.page === 1"
-              (click)="decrementPage()"
-              fill="clear"
-            >
-              <ion-icon
-                color="primary"
-                size="large"
-                name="arrow-dropleft"
-                class="ion-margin-end"
-              ></ion-icon>
+            <ion-button [disabled]="searchResult.page === 1" (click)="decrementPage()" fill="clear">
+              <ion-icon color="primary" size="large" name="arrow-dropleft" class="ion-margin-end"></ion-icon>
             </ion-button>
           </ion-col>
-          <ion-col size="4" class="ion-align-self-center">
-            Page {{ searchResult['page'] }} of {{ searchResult['total_pages'] }}
-          </ion-col>
+          <ion-col size="4" class="ion-align-self-center"> Page {{ searchResult['page'] }} of {{ searchResult['total_pages'] }} </ion-col>
           <ion-col size="4">
-            <ion-button
-              [disabled]="searchResult.page === searchResult.total_pages"
-              (click)="incrementPage()"
-              fill="clear"
-            >
-              <ion-icon
-                color="primary"
-                size="large"
-                name="arrow-dropright"
-              ></ion-icon>
+            <ion-button [disabled]="searchResult.page === searchResult.total_pages" (click)="incrementPage()" fill="clear">
+              <ion-icon color="primary" size="large" name="arrow-dropright"></ion-icon>
             </ion-button>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
-            <ion-card *ngFor="let result of searchResult['results']">
+            <ion-card (click)="saveCard(result)" *ngFor="let result of searchResult['results']">
               <ion-card-header>
                 <ion-card-subtitle>
                   {{ result.reference }}

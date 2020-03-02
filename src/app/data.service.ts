@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-  AngularFirestoreDocument,
-  DocumentReference
-} from '@angular/fire/firestore';
-import { map, take } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+
 import { Observable } from 'rxjs';
 
 export interface Verse {

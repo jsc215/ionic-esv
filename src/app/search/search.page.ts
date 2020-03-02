@@ -1,11 +1,6 @@
 import { SearchService } from './search.service';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
@@ -81,6 +76,9 @@ export class SearchPage implements OnInit {
     });
   }
 
+  saveCard(verse) {
+    console.log(verse);
+  }
   getSearch() {
     this.isLoading = true;
     this.showSearch = false;
@@ -91,6 +89,8 @@ export class SearchPage implements OnInit {
           this.storedQuery = this.searchForm.value;
         }
         this.searchResult = data;
+        console.log(this.searchResult);
+
         this.searchForm.reset(this.createSearchForm());
         this.isLoading = false;
       },

@@ -30,9 +30,10 @@ npm-debug.log*
 /plugins
 /www
 /ios
+/android
 capacitor.config.json
 server/config.js
-/environments/environment.heroku.ts
-/environments/environment.ts
+/environments
 /data
 /server
+

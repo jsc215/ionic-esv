@@ -10,7 +10,7 @@ export class HomePage implements OnInit {
   constructor(private dataSvc: DataService) {}
 
   ngOnInit() {
-    this.verses = this.dataSvc.getVerses();
-    console.log(this.verses);
+    // this.verses = this.dataSvc.getVerses();
+    // console.log(this.verses);
   }
 }
