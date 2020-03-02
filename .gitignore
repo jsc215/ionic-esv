@@ -33,7 +33,7 @@ npm-debug.log*
 /android
 capacitor.config.json
 server/config.js
-/src/environments
+/firebaseConfig.ts
 /data
 /server
 
