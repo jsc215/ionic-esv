@@ -33,5 +33,6 @@ npm-debug.log*
 capacitor.config.json
 server/config.js
 /environments/environment.heroku.ts
+/environments/environment.ts
 /data
 /server

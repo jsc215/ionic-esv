@@ -106,14 +106,10 @@
             },
             "ci": {
               "progress": false
-            }
-          },
-          "heroku": {
-            "production": {
-              "browserTarget": "app:build:heroku"
             },
-            "ci": {},
-            "progress": false
+            "heroku": {
+              "browserTarget": "app:build:heroku"
+            }
           }
         },
         "extract-i18n": {
@@ -154,14 +150,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
