@@ -94,13 +94,13 @@
         <ion-row class="ion-text-center">
           <ion-col size="4">
             <ion-button [disabled]="searchResult.page === 1" (click)="decrementPage()" fill="clear">
-              <ion-icon color="primary" size="large" name="arrow-dropleft" class="ion-margin-end"></ion-icon>
+              <ion-icon color="primary" size="large" name="arrow-back-circle-outline" class="ion-margin-end"></ion-icon>
             </ion-button>
           </ion-col>
           <ion-col size="4" class="ion-align-self-center"> Page {{ searchResult['page'] }} of {{ searchResult['total_pages'] }} </ion-col>
           <ion-col size="4">
             <ion-button [disabled]="searchResult.page === searchResult.total_pages" (click)="incrementPage()" fill="clear">
-              <ion-icon color="primary" size="large" name="arrow-dropright"></ion-icon>
+              <ion-icon color="primary" size="large" name="arrow-forward-circle-outline"></ion-icon>
             </ion-button>
           </ion-col>
         </ion-row>
